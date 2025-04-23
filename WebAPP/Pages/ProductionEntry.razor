@@ -1,0 +1,85 @@
+﻿@page "/ProductionEntry"
+@using System.ComponentModel.DataAnnotations
+
+<EditForm Model="@productionData" OnValidSubmit="HandleValidSubmit">
+    <div class="container p-4 bg-light rounded">
+        <h4 class="mb-4 fw-bold">Enter Production Data</h4>
+
+        <div class="mb-3">
+            <label class="form-label">Date</label>
+            <InputDate class="form-control" @bind-Value="productionData.Date" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Line</label>
+            <InputSelect class="form-select" @bind-Value="productionData.Line">
+                <option>Line 1</option>
+                <option>Line 2</option>
+                <option>Line 3</option>
+                <option>Line 4</option>
+            </InputSelect>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Shift</label>
+            <InputSelect class="form-select" @bind-Value="productionData.Shift">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </InputSelect>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Product</label>
+            <InputText class="form-control" @bind-Value="productionData.Product" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Line Speed</label>
+            <InputText class="form-control" @bind-Value="productionData.LineSpeed" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Total Production</label>
+            <InputText class="form-control" @bind-Value="productionData.TotalProduction" />
+        </div>
+
+        <div class="d-flex gap-3">
+            <button type="button" class="btn btn-outline-primary" @onclick="ClearForm">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    private ProductionData productionData = new();
+
+    private void HandleValidSubmit()
+    {
+        // Logic to handle form submission
+        Console.WriteLine("Submitted");
+    }
+
+    private void ClearForm()
+    {
+        productionData = new();
+    }
+
+    public class ProductionData
+    {
+        [Required]
+        public DateTime Date { get; set; } = DateTime.Today;
+
+        [Required]
+        public string Line { get; set; } = "Line 1";
+
+        [Required]
+        public string Shift { get; set; } = "A";
+
+        public string Product { get; set; } = "PRODUCT 1";
+
+        public string LineSpeed { get; set; } = "0000";
+
+        public string TotalProduction { get; set; } = "0000";
+    }
+}
